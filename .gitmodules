@@ -1,0 +1,3 @@
+[submodule "codes/gmapi"]
+	path = codes/gmapi
+	url = https://github.com/iaea-nds/GMAP-Python.git
