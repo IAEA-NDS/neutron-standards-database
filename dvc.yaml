@@ -1,0 +1,12 @@
+stages:
+  prepare_data:
+    cmd: python codes/create_data_with_sacs_variations.py
+    deps:
+    - codes/create_data_with_sacs_variations.py
+    - database/data.json
+    - database/data2017.json
+    outs:
+    - database/data2017_with_mannhart_sacs.json
+    - database/data2017_without_sacs.json
+    - database/data_with_mannhart_sacs.json
+    - database/data_without_sacs.json
