@@ -4,8 +4,8 @@ stages:
     cmd: python codes/create_data_with_sacs_variations.py
     deps:
     - path: codes/create_data_with_sacs_variations.py
-      md5: 8abf935a797289d1f58c446f7fdf53c5
-      size: 6153
+      md5: 03b9bc7b60ac1cea53b6d78ee9638de1
+      size: 6264
     - path: database/data.json
       md5: cc8d741e7f910674c29eaed89a8887ae
       size: 8638475
