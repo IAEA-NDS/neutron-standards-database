@@ -145,8 +145,8 @@ def add_mannhart_sacs(datablock_list):
 #   - with SACS and ratio of SACS data as used by Mannhart
 
 datafiles = [
-    '../database/data.json',
-    '../database/data2017.json',
+    'database/data.json',
+    'database/data2017.json',
 ]
 
 ops = [
