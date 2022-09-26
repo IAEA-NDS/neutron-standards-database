@@ -6,7 +6,9 @@ from gmapi import GMADatabase
 import matplotlib.pyplot as plt
 from gmapi.mappings.compound_map import CompoundMap
 
-dbdir='../database'
+
+plotdir = 'plots'
+dbdir='database'
 dbnames = [
     'data2017',
     'data2017_without_sacs',
@@ -15,6 +17,9 @@ dbnames = [
     'data_without_sacs',
     'data_with_mannhart_sacs'
     ]
+
+
+os.makedirs(plotdir)
 
 gmadbs = {
     nm: GMADatabase(os.path.join(dbdir, nm + '.json'))
@@ -65,7 +70,7 @@ def create_xs_to_ref_plots(energy_range, yrange, reacstrings):
         plt.title(reac_descr)
         # sanitize filename
         fname = 'ratio_plot_' + re.sub('[(),]', '_', reac_descr) + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-        plt.savefig(fname, dpi=150, bbox_inches='tight')
+        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
         plt.clf()
 
 
@@ -88,7 +93,7 @@ def create_uncertainty_plots(energy_range, yrange, reacstrings):
         plt.ylabel('relative uncertainty')
         plt.title(reac_descr)
         fname = 'uncertainty_plot_' + re.sub('[(),]', '_', reac_descr) + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-        plt.savefig(fname, dpi=150, bbox_inches='tight')
+        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
         plt.clf()
 
 
@@ -125,7 +130,7 @@ def plot_ratio_pu9_to_u5(energy_range):
     plt.xlabel('energy [MeV]')
     plt.ylabel('ratio PU9/U5(n,f) relative to std2017')
     fname = 'ratio_pu9_to_u5_comparisons' + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-    plt.savefig(fname, dpi=150, bbox_inches='tight')
+    plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
     plt.clf()
 
 
@@ -170,7 +175,7 @@ def plot_sacs_table():
     for dbname, curdf in extdfs.items():
         pseudo_exp_df[dbname] = curdf.loc[curdf.NODE.str.match('exp_270.'), 'POST'].to_numpy()
 
-    pseudo_exp_df.to_excel('sacs_table.xlsx')
+    pseudo_exp_df.to_excel(os.path.join(plotdir, 'sacs_table.xlsx'))
 
 
 
