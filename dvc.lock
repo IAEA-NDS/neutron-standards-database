@@ -4,8 +4,8 @@ stages:
     cmd: python codes/create_data_with_sacs_variations.py
     deps:
     - path: codes/create_data_with_sacs_variations.py
-      md5: 984a1d79758b4ab0239f7c5ed41a87ef
-      size: 5779
+      md5: 8abf935a797289d1f58c446f7fdf53c5
+      size: 6153
     - path: database/data.json
       md5: cc8d741e7f910674c29eaed89a8887ae
       size: 8638475
@@ -14,14 +14,14 @@ stages:
       size: 8405267
     outs:
     - path: database/data2017_with_mannhart_sacs.json
-      md5: 000569c84b51f832f95daeceea973c15
-      size: 8484329
+      md5: 97e717a61bdd42310e29e4c736242ad2
+      size: 8488476
     - path: database/data2017_without_sacs.json
       md5: d8b99482ef9bc0cbacb65f4552e99c14
       size: 8439385
     - path: database/data_with_mannhart_sacs.json
-      md5: 8168cedca03839531057b3e5bda54ef7
-      size: 8719528
+      md5: 34c97a69a09648c66845896e3fbe4a97
+      size: 8723675
     - path: database/data_without_sacs.json
       md5: 3435c8477dc48392cf5c9bd48b30e696
       size: 8674584
@@ -32,11 +32,11 @@ stages:
       md5: 79f99e2c9f0325062daebe7ad07313ab
       size: 7856
     - path: database/
-      md5: 612edfdb41fe617beb07ae7faae637be.dir
-      size: 54431421
+      md5: 565c559c20078981f31dbf6e61f3dd04.dir
+      size: 54439715
       nfiles: 10
     outs:
     - path: plots/
-      md5: e3a45f2a323740bb629f7f89479a8075.dir
-      size: 244841
+      md5: bb12df22e809737e21f25cca416d2653.dir
+      size: 244680
       nfiles: 15
