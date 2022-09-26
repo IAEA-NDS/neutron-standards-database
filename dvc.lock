@@ -25,3 +25,18 @@ stages:
     - path: database/data_without_sacs.json
       md5: 3435c8477dc48392cf5c9bd48b30e696
       size: 8674584
+  create_plots:
+    cmd: python codes/create_analysis_plots.py
+    deps:
+    - path: codes/create_analysis_plots.py
+      md5: 79f99e2c9f0325062daebe7ad07313ab
+      size: 7856
+    - path: database/
+      md5: 612edfdb41fe617beb07ae7faae637be.dir
+      size: 54431421
+      nfiles: 10
+    outs:
+    - path: plots/
+      md5: e3a45f2a323740bb629f7f89479a8075.dir
+      size: 244841
+      nfiles: 15

@@ -10,3 +10,10 @@ stages:
     - database/data2017_without_sacs.json
     - database/data_with_mannhart_sacs.json
     - database/data_without_sacs.json
+  create_plots:
+    cmd: python codes/create_analysis_plots.py
+    deps:
+    - codes/create_analysis_plots.py
+    - database/
+    outs:
+    - plots/
