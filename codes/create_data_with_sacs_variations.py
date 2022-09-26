@@ -1,3 +1,6 @@
+# cf252_dat2022.txt contains the SACS and SACS ratios
+# as provided by Roberto per email on 26 September 2022
+
 import os
 import numpy as np
 import pandas as pd
