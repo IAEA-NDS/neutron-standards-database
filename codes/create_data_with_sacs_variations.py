@@ -72,20 +72,6 @@ ds.add_norm_uncertainty(1.45)
 mannhart_sacs_datablock.add_datasets(ds)
 
 ds = Dataset()
-ds.define_metadata(2510, 1985, 'Schroeder U8f')
-ds.define_quantity(6, [10])
-ds.define_measurements([1.], [0.332])
-ds.add_norm_uncertainty(1.5)
-mannhart_sacs_datablock.add_datasets(ds)
-
-ds = Dataset()
-ds.define_metadata(2511, 1985, 'Schroeder Pu9f')
-ds.define_quantity(6, [9])
-ds.define_measurements([1.], [1.844])
-ds.add_norm_uncertainty(1.3)
-mannhart_sacs_datablock.add_datasets(ds)
-
-ds = Dataset()
 ds.define_metadata(2512, 1978, 'Knoll U5f')
 ds.define_quantity(6, [8])
 ds.define_measurements([1.], [1.215])
@@ -99,20 +85,42 @@ ds.define_measurements([1.], [1.79])
 ds.add_norm_uncertainty(2.26)
 mannhart_sacs_datablock.add_datasets(ds)
 
+ds = Dataset()
+ds.define_metadata(2514, 2100, 'Adamov U8f/U5f')
+ds.define_quantity(10, [10,8])
+ds.define_measurements([1.], [0.2741])
+ds.add_norm_uncertainty(1.66)
+mannhart_sacs_datablock.add_datasets(ds)
+
+ds = Dataset()
+ds.define_metadata(2515, 2100, 'Adamov Pu9f/U5f ')
+ds.define_quantity(10, [9,8])
+ds.define_measurements([1.], [1.475])
+ds.add_norm_uncertainty(1.5)
+mannhart_sacs_datablock.add_datasets(ds)
+
+ds = Dataset()
+ds.define_metadata(2516, 2100, 'NBS-VNC + Spiegel U8f/U5f')
+ds.define_quantity(10, [10,8])
+ds.define_measurements([1.], [0.2491])
+ds.add_norm_uncertainty(5.22)
+mannhart_sacs_datablock.add_datasets(ds)
+
 # define the correlation matrix
 tmp = np.array([
-[ 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   1    Grundl memo ABS (rev. Heaton)
-[  23, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   2    Grundl/Gilliam ratio
-[  -9,  15, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   4    Grundl/Gilliam ratio
-[   0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0,   0],      #   5    Heaton ratio
-[   0,   0,   0,  60, 100,   0,   0,   0,   0,   0,   0,   0],      #   6    Heaton ratio
-[   0,   0,   0,   0,   0, 100,   0,   0,   0,   0,   0,   0],      #   7    Schroeder ratio
-[   0,   0,   0,   0,   0,  77, 100,   0,   0,   0,   0,   0],      #   8    Schroeder ratio
-[   0,   0,   0,   0,   0,   0,   0, 100,   0,   0,   0,   0],      #   9    Schroeder ABS
-[   0,   0,   0,   0,   0,   0,   0,  50, 100,   0,   0,   0],      #  10    Schroeder ABS
-[   0,   0,   0,   0,   0,   0,   0,  50,  50, 100,   0,   0],      #  11    Schroeder ABS
-[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 100,   0],      #  12    Davis/Knoll abs
-[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  59, 100]       #  13    Davis/Knoll
+[ 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   1    Grundl memo ABS (rev. Heaton)
+[  23, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   2    Grundl/Gilliam ratio
+[  -9,  36, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   4    Grundl/Gilliam ratio
+[   0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   5    Heaton ratio
+[   0,   0,   0,  60, 100,   0,   0,   0,   0,   0,   0,   0,   0],      #   6    Heaton ratio
+[   0,   0,   0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0],      #   7    Schroeder ratio
+[   0,   0,   0,   0,   0,  77, 100,   0,   0,   0,   0,   0,   0],      #   8    Schroeder ratio
+[   0,   0,   0,   0,   0,   0,   0, 100,   0,   0,   0,   0,   0],      #   9    Schroeder ABS
+[   0,   0,   0,   0,   0,   0,   0,   0, 100,   0,   0,   0,   0],      #  12    Davis/Knoll abs
+[   0,   0,   0,   0,   0,   0,   0,   0,  59, 100,   0,   0,   0],      #  13    Davis/Knoll
+[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 100,   0,   0],      #  14    Adamov
+[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  29, 100,   0],      #  15    Adamov
+[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 100],      #  16    NBS-VNC + Spiegel
 ])
 # make the covariance matrix symmetric
 cormat = (tmp + tmp.T) / 1e2
