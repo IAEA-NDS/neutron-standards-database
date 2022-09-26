@@ -1,0 +1,27 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python codes/create_data_with_sacs_variations.py
+    deps:
+    - path: codes/create_data_with_sacs_variations.py
+      md5: 984a1d79758b4ab0239f7c5ed41a87ef
+      size: 5779
+    - path: database/data.json
+      md5: cc8d741e7f910674c29eaed89a8887ae
+      size: 8638475
+    - path: database/data2017.json
+      md5: 4974fce168ed901acecd0ec240f0f423
+      size: 8405267
+    outs:
+    - path: database/data2017_with_mannhart_sacs.json
+      md5: 000569c84b51f832f95daeceea973c15
+      size: 8484329
+    - path: database/data2017_without_sacs.json
+      md5: d8b99482ef9bc0cbacb65f4552e99c14
+      size: 8439385
+    - path: database/data_with_mannhart_sacs.json
+      md5: 8168cedca03839531057b3e5bda54ef7
+      size: 8719528
+    - path: database/data_without_sacs.json
+      md5: 3435c8477dc48392cf5c9bd48b30e696
+      size: 8674584
