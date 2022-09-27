@@ -13,7 +13,6 @@ pandas = ">=1.4.4"
 scipy = "^1.9.1"
 fortranformat = "^1.2.2"
 scikit-sparse = "^0.4.6"
-openpyxl = "^3.0.10"
 dvc = "^2.27.2"
 gmapi = {git = "https://github.com/iaea-nds/gmapy.git", rev = "6a67416" }
 matplotlib = "^3.6.0"
