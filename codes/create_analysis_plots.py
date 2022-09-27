@@ -183,7 +183,7 @@ def plot_sacs_table():
     for dbname, curdf in extdfs.items():
         pseudo_exp_df[dbname] = curdf.loc[curdf.NODE.str.match('exp_270.'), 'POST'].to_numpy()
 
-    pseudo_exp_df.to_excel(os.path.join(plotdir, 'sacs_table.xlsx'))
+    pseudo_exp_df.to_csv(os.path.join(plotdir, 'sacs_table.csv'), header=True, index=False)
 
 
 
