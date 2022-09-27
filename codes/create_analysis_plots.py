@@ -49,6 +49,14 @@ for k, v in newdfs.items():
     refxsdf[new_postunc_colname] = redv['POSTUNC'] / redv['POST']
 
 
+def pdf_metadata():
+    return {
+            'Creator': None,
+            'Producer': None,
+            'CreationDate': None
+        }
+
+
 def create_xs_to_ref_plots(energy_range, yrange, reacstrings):
     """Plots of Evaluated xs relative to evaluated std2017 xs."""
     for reacstr in reacstrings:
@@ -70,7 +78,7 @@ def create_xs_to_ref_plots(energy_range, yrange, reacstrings):
         plt.title(reac_descr)
         # sanitize filename
         fname = 'ratio_plot_' + re.sub('[(),]', '_', reac_descr) + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
+        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight', metadata=pdf_metadata())
         plt.clf()
 
 
@@ -93,7 +101,7 @@ def create_uncertainty_plots(energy_range, yrange, reacstrings):
         plt.ylabel('relative uncertainty')
         plt.title(reac_descr)
         fname = 'uncertainty_plot_' + re.sub('[(),]', '_', reac_descr) + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
+        plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight', metadata=pdf_metadata())
         plt.clf()
 
 
@@ -130,7 +138,7 @@ def plot_ratio_pu9_to_u5(energy_range):
     plt.xlabel('energy [MeV]')
     plt.ylabel('ratio PU9/U5(n,f) relative to std2017')
     fname = 'ratio_pu9_to_u5_comparisons' + '_from_' + str(energy_range[0]) + '_to_' + str(energy_range[1]) + '.pdf'
-    plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight')
+    plt.savefig(os.path.join(plotdir, fname), dpi=150, bbox_inches='tight', metadata=pdf_metadata())
     plt.clf()
 
 
