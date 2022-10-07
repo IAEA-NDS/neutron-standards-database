@@ -1,24 +1,24 @@
  3     number of sets
 cf_dat.dat         Set 1
-EXPERIMENT : Heaton + Grundl memo + Grundl-Gilliam + Schroeder + Davis/Knoll  
+EXPERIMENT : Heaton + Grundl memo + Grundl-Gilliam + Schroeder + Davis/Knoll
 10
- 1  1  0 1.216E+3  1.6200    U235F                GRUNDL MEMO (Rev. Heaton 1976 ABSOL U-235f),indc(nds)-146, p.237 
- 2  1  2 3.73      1.2000    U235F/U238F          GRUNDL-GILLIAM indc(nds)-146, p.244, inverse = 0.2681
- 3  1  3 0.666     0.9000    U235F/PU239F         GRUNDL-GILLIAM indc(nds)-146, p.244, inverse = 1.502 (0.9%)
- 4  3  1 1.500E+0  1.6000    PU239F/U235F         Heaton 1976 ANL-76-90 60% ratio correl derived from common ratio uncert.  
+ 1  1  0 1.216E+3  1.6200    U235F                GRUNDL MEMO (Rev. Heaton 1976 ABSOL U-235f),indc(nds)-146, p.237   - Used by Mannhart
+ 2  1  2 3.73      1.2000    U235F/U238F          GRUNDL-GILLIAM indc(nds)-146 (1983), p.244, inverse = 0.2681       - Used by Mannhart
+ 3  1  3 0.666     0.9000    U235F/PU239F         GRUNDL-GILLIAM indc(nds)-146 (1983), p.244, inverse = 1.502 (0.9%) - Used by Mannhart
+ 4  3  1 1.500E+0  1.6000    PU239F/U235F         Heaton 1976 ANL-76-90 60% ratio correl derived from common ratio uncert.
  5  2  1 0.2644    1.3200    U238F/U235F          Heaton 1976 ANL-76-90 60% ratio correl derived from common ratio uncert.
  6  2  1 0.269E+0  1.2000    U238F/U235F          Schroeder JANS 50(1985)154
  7  3  1 1.500E+0  0.8000    PU239F/U235F         Schroeder JANS 50(1985)154
  8  1  0 1.234E+3  1.4500    U235F                Schroeder JANS 50(1985)154
- 9  1  0 1.215E+3  1.7900    U235F                Davis/Knoll ANE 5 (1978) 583
-10  3  0 1.790E+3  2.2600    PU239F               Davis/Knoll ANE 5 (1978) 583 
+ 9  1  0 1.215E+3  1.7900    U235F                Davis/Knoll ANE 5 (1978) 583 - Used by Mannhart
+10  3  0 1.790E+3  2.2600    PU239F               Davis/Knoll ANE 5 (1978) 583 - Used by Mannhart
  100                                                                                         1    Grundl memo ABS (rev. Heaton)
   23 100                                                                                     2    Grundl/Gilliam ratio
   -9  36 100                                                                                 3    Grundl/Gilliam ratio
    0   0   0 100                                                                             4    Heaton ratio
    0   0   0  60 100                                                                         5    Heaton ratio
    0   0   0   0   0 100                                                                     6    Schroeder ratio
-   0   0   0   0   0  77 100                                                                 7    Schroeder ratio
+   0   0   0   0   0  39 100                                                                 7    Schroeder ratio
    0   0   0   0   0   0   0 100                                                             8    Schroeder ABS
    0   0   0   0   0   0   0   0 100                                                         9    Davis/Knoll abs
    0   0   0   0   0   0   0   0  59 100                                                     10   Davis/Knoll abs
@@ -28,12 +28,11 @@ EXPERIMENT : ADAMOV
  1  2  1 2.741E-1  1.6600    U238F/U235F     *1.0       ADAMOV
  2  3  1 1.475E+0  1.5000    PU239F/U235F    *1.0
  100
-  29 100
+  39 100
                    Set 3
 EXPERIMENT: NBS-VNC + SPIEGEL
  1
  1  2  1 2.491E-1  5.2200    U238F/U235F      *2.0
  100
-  33 100
 
 
