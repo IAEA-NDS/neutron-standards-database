@@ -113,16 +113,16 @@ mannhart_sacs_datablock.add_datasets(ds)
 tmp = np.array([
 [ 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   1    Grundl memo ABS (rev. Heaton)
 [  23, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   2    Grundl/Gilliam ratio
-[  -9,  36, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   4    Grundl/Gilliam ratio
+[  -9,  15, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   4    Grundl/Gilliam ratio
 [   0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0,   0,   0],      #   5    Heaton ratio
-[   0,   0,   0,  60, 100,   0,   0,   0,   0,   0,   0,   0,   0],      #   6    Heaton ratio
+[   0,   0,   0,  59, 100,   0,   0,   0,   0,   0,   0,   0,   0],      #   6    Heaton ratio
 [   0,   0,   0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0],      #   7    Schroeder ratio
-[   0,   0,   0,   0,   0,  77, 100,   0,   0,   0,   0,   0,   0],      #   8    Schroeder ratio
+[   0,   0,   0,   0,   0,  39, 100,   0,   0,   0,   0,   0,   0],      #   8    Schroeder ratio
 [   0,   0,   0,   0,   0,   0,   0, 100,   0,   0,   0,   0,   0],      #   9    Schroeder ABS
 [   0,   0,   0,   0,   0,   0,   0,   0, 100,   0,   0,   0,   0],      #  12    Davis/Knoll abs
 [   0,   0,   0,   0,   0,   0,   0,   0,  59, 100,   0,   0,   0],      #  13    Davis/Knoll
 [   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 100,   0,   0],      #  14    Adamov
-[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  29, 100,   0],      #  15    Adamov
+[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  39, 100,   0],      #  15    Adamov
 [   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 100],      #  16    NBS-VNC + Spiegel
 ])
 # make the covariance matrix symmetric
