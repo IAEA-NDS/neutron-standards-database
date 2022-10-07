@@ -29,6 +29,10 @@ gmadbs = {
 for k, gmadb in gmadbs.items():
     print('evaluating ' + k)
     gmadb.evaluate(correct_ppp=True)
+    # save the resulting datatable with uncertainties
+    curdt = gmadb.get_datatable()
+    curcsvfile = 'datatable_for_' + k + '.csv'
+    curdt.to_csv(os.path.join(plotdir, curcsvfile), header=True, index=True)
 
 
 linestyles = ['solid', 'dotted', 'dashed', 'dashdot', (5,(10,3)), (0,(5,11)), (0,(3,1,1,1,1))]
