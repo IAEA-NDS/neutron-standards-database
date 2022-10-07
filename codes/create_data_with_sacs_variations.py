@@ -16,7 +16,7 @@ from gmapi.legacy.conversion_utils import NumpyEncoder
 
 # define all the SACS measurements
 
-mannhart_sacs_datablock = Datablock() 
+mannhart_sacs_datablock = Datablock()
 
 ds = Dataset()
 ds.define_metadata(2500, 1976, 'Heaton U5nf')
@@ -149,6 +149,70 @@ def add_mannhart_sacs(datablock_list):
     datablock_list = dblist.get_datablock_list(dict)
     return datablock_list
 
+def change_pu9_absratio_to_shape(datablock_list, add_sacs=True):
+    if add_sacs:
+        datablock_list = add_mannhart_sacs(datablock_list)
+    for db in datablock_list:
+        for ds in db['datasets']:
+            if (ds['MT'] == 3 and (
+                (ds['NT'][0] == 9 and ds['NT'][1] in (8,10)) or
+                (ds['NT'][1] == 9 and ds['NT'][0] in (8,10)))):
+                ds['MT'] = 4
+                print(f'teststring pu9: {ds["NS"]} - {ds["MT"]} : {ds["NT"]}')
+    return datablock_list
+
+def change_u5_absratio_to_shape(datablock_list, add_sacs=True):
+    if add_sacs: datablock_list = add_mannhart_sacs(datablock_list)
+    for db in datablock_list:
+        for ds in db['datasets']:
+            if (ds['MT'] == 3 and (
+                (ds['NT'][0] == 8 and ds['NT'][1] in (9,)) or
+                (ds['NT'][1] == 8 and ds['NT'][0] in (9,)))):
+                ds['MT'] = 4
+                print(f'teststring u5: {ds["NS"]} - {ds["MT"]} : {ds["NT"]}')
+    return datablock_list
+
+def change_u5_and_pu9_absratio_to_shape(datablock_list, add_sacs=True):
+    if add_sacs:
+        datablock_list = add_mannhart_sacs(datablock_list)
+    datablock_list = change_u5_absratio_to_shape(datablock_list, add_sacs=False)
+    datablock_list = change_pu9_absratio_to_shape(datablock_list, add_sacs=False)
+    return datablock_list
+
+def remove_abs_pu9_xs(datablock_list):
+    datablock_list = change_u5_and_pu9_absratio_to_shape(datablock_list)
+    remove_dsids = []
+    # impact of removing abs Pu9 xs large (0.7%); removing maybe justified
+    # impact of removing abs U5 small (0.3%); removing not justified
+    for db in datablock_list:
+        for ds in db['datasets']:
+            if ds['MT'] == 1 and ds['NT'][0] in (9,):
+                remove_dsids.append(ds['NS'])
+
+    dblist = DatablockList(datablock_list)
+    if len(remove_dsids) > 0:
+        dblist.remove_datasets(remove_dsids)
+    datablock_list = dblist.get_datablock_list(dict)
+    return datablock_list
+
+
+def remove_abs_pu9_xs_above_13MeV(datablock_list):
+    datablock_list = change_u5_and_pu9_absratio_to_shape(datablock_list)
+    remove_dsids = []
+    # impact of removing abs Pu9 xs large (0.7%); removing maybe justified
+    # impact of removing abs U5 small (0.3%); removing not justified
+    for db in datablock_list:
+        for ds in db['datasets']:
+            if (ds['MT'] == 1 and ds['NT'][0] in (9,) and
+                    np.any(np.array(ds['E']) > 12.5)):
+                remove_dsids.append(ds['NS'])
+
+    dblist = DatablockList(datablock_list)
+    if len(remove_dsids) > 0:
+        dblist.remove_datasets(remove_dsids)
+    datablock_list = dblist.get_datablock_list(dict)
+    return datablock_list
+
 
 # following we create several variations of the
 # standards 2017 and current data.gma file:
@@ -162,25 +226,38 @@ datafiles = [
 
 ops = [
     remove_sacs_data,
-    add_mannhart_sacs
+    add_mannhart_sacs,
+    change_pu9_absratio_to_shape,
+    change_u5_absratio_to_shape,
+    change_u5_and_pu9_absratio_to_shape,
+    remove_abs_pu9_xs,
+    remove_abs_pu9_xs_above_13MeV
 ]
 
 file_suffix = [
     '_without_sacs',
-    '_with_mannhart_sacs'
+    '_with_mannhart_sacs',
+    '_newsacs_no_absratio_pu9',
+    '_newsacs_no_absratio_u5',
+    '_newsacs_no_absratio_u5_and_pu9',
+    '_newsacs_no_absratios_pu9_no_abs_pu9_xs',
+    '_newsacs_no_absratios_pu9_no_abs_pu9_xs_above13MeV'
 ]
 
 
 for curdatafile in datafiles:
-    for curop, cursuffix in zip(ops, file_suffix): 
+    for curop, cursuffix in zip(ops, file_suffix):
+        print('creating database for ' + cursuffix)
         db_dic = read_gma_database(curdatafile)
-        new_datablock_list = curop(db_dic['datablock_list'])
+        # make a copy just to be sure
+        datablock_list_copy = deepcopy(db_dic['datablock_list'])
+        new_datablock_list = curop(datablock_list_copy)
         new_db_dic = {
                 'prior': db_dic['prior_list'],
                 'datablocks': new_datablock_list
                 }
         splitfn = os.path.splitext(curdatafile)
-        new_filename = splitfn[0] + cursuffix + splitfn[1] 
+        new_filename = splitfn[0] + cursuffix + splitfn[1]
         with open(new_filename, 'w') as f:
             json.dump(new_db_dic, f, indent=4, cls=NumpyEncoder)
 

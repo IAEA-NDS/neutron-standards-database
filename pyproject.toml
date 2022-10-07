@@ -14,7 +14,7 @@ scipy = "^1.9.1"
 fortranformat = "^1.2.2"
 scikit-sparse = "^0.4.6"
 dvc = "^2.27.2"
-gmapi = {git = "https://github.com/iaea-nds/gmapy.git", rev = "7cd94e1" }
+gmapi = {git = "https://github.com/iaea-nds/gmapy.git", rev = "7dc62d4" }
 matplotlib = "^3.6.0"
 
 

@@ -11,11 +11,13 @@ plotdir = 'plots'
 dbdir='database'
 dbnames = [
     'data2017',
-    'data2017_without_sacs',
     'data2017_with_mannhart_sacs',
     'data',
-    'data_without_sacs',
-    'data_with_mannhart_sacs'
+    'data_with_mannhart_sacs',
+    'data_newsacs_no_absratio_pu9',
+    'data_newsacs_no_absratio_u5',
+    'data_newsacs_no_absratios_pu9_no_abs_pu9_xs',
+    'data_newsacs_no_absratios_pu9_no_abs_pu9_xs_above13MeV'
     ]
 
 
@@ -26,6 +28,13 @@ gmadbs = {
         for nm in dbnames
     }
 
+# add a regularization
+# for k, gmadb in gmadbs.items():
+#     curdt = gmadb.get_datatable()
+#     curdt.loc[curdt['NODE'].str.match('xsid_'), 'UNC'] = 1e3
+#     curdt.loc[curdt['NODE'].str.match('norm_'), 'UNC'] = 1e3
+#     gmadb.set_datatable(curdt)
+
 for k, gmadb in gmadbs.items():
     print('evaluating ' + k)
     gmadb.evaluate(correct_ppp=True)
@@ -35,21 +44,25 @@ for k, gmadb in gmadbs.items():
     curdt.to_csv(os.path.join(plotdir, curcsvfile), header=True, index=True)
 
 
-linestyles = ['solid', 'dotted', 'dashed', 'dashdot', (5,(10,3)), (0,(5,11)), (0,(3,1,1,1,1))]
+lsty_dashdotted = (0, (3, 5, 1, 5))
+lsty_denselydashed = (0, (5, 1))
+linestyles = ['solid', 'dotted', 'dashed', 'dashdot',
+        (5,(10,3)), (0,(5,11)), (0,(3,1,1,1,1)),
+        lsty_dashdotted, lsty_denselydashed]
 
-refdf = gmadbs['data2017'].get_datatable() 
-newdfs = {k: db.get_datatable() for k, db in gmadbs.items()} 
+refdf = gmadbs['data2017'].get_datatable()
+newdfs = {k: db.get_datatable() for k, db in gmadbs.items()}
 refxsdf = refdf[refdf.NODE.str.match('xsid_')].copy()
 for k, v in newdfs.items():
     new_post_colname = 'POST_' + k
     redv = v[v.NODE.str.match('xsid_')].copy()
-    refxsdf[new_post_colname] = redv['POST'] / refxsdf['POST'] 
+    refxsdf[new_post_colname] = redv['POST'] / refxsdf['POST']
 
 for k, v in newdfs.items():
     new_post_colname = 'POST_' + k
     new_postunc_colname = 'POSTUNC_' + k
     redv = v[v.NODE.str.match('xsid_')].copy()
-    refxsdf[new_post_colname] = redv['POST'] / refxsdf['POST'] 
+    refxsdf[new_post_colname] = redv['POST'] / refxsdf['POST']
     refxsdf[new_postunc_colname] = redv['POSTUNC'] / redv['POST']
 
 
@@ -112,12 +125,12 @@ def create_uncertainty_plots(energy_range, yrange, reacstrings):
 def plot_ratio_pu9_to_u5(energy_range):
     """Plots of evaluated ratios Pu9/U5 (n,f)."""
     ratio_dic = {}
-    common_en = None 
+    common_en = None
     for dbname, gmadb in gmadbs.items():
         curdf = gmadb.get_datatable()
         pu9_sel = (curdf.REAC == 'MT:1-R1:9') & (curdf.NODE.str.match('xsid_'))
         u5_sel = (curdf.REAC == 'MT:1-R1:8') & (curdf.NODE.str.match('xsid_'))
-        cur_pu9_en = curdf.loc[pu9_sel, 'ENERGY'].to_numpy() 
+        cur_pu9_en = curdf.loc[pu9_sel, 'ENERGY'].to_numpy()
         cur_pu9_xs = curdf.loc[pu9_sel, 'POST'].to_numpy()
         cur_u5_en = curdf.loc[u5_sel, 'ENERGY'].to_numpy()
         cur_u5_xs = curdf.loc[u5_sel, 'POST'].to_numpy()
@@ -135,7 +148,7 @@ def plot_ratio_pu9_to_u5(energy_range):
             curlabel = 'data_feb2022'
         curratio = ratio_dic[dbname] / ratio_dic['data2017']
         plt.plot(common_en, curratio, label=curlabel)
-        
+
     plt.legend(loc='upper right', prop={'size': 6})
     plt.xlim(energy_range)
     plt.ylim([0.98, 1.02])
@@ -177,10 +190,10 @@ def plot_sacs_table():
 
     extdfs = {}
     compmap = CompoundMap()
-    for dbname, curdb in gmadbs.items(): 
-        curdf = curdb.get_datatable() 
+    for dbname, curdb in gmadbs.items():
+        curdf = curdb.get_datatable()
         extcurdf = pd.concat([curdf, pseudo_exp_df], ignore_index=True)
-        curprop = compmap.propagate(extcurdf, extcurdf['POST'].to_numpy())  
+        curprop = compmap.propagate(extcurdf, extcurdf['POST'].to_numpy())
         extcurdf['POST'] = curprop
         extdfs[dbname] = extcurdf
 
@@ -196,6 +209,6 @@ create_xs_to_ref_plots([0.1, 5], [0.99, 1.01], reacstrs)
 create_xs_to_ref_plots([13, 15], [0.98, 1.02], reacstrs)
 plot_ratio_pu9_to_u5([0.1, 5])
 plot_ratio_pu9_to_u5([13, 15])
-create_uncertainty_plots([0.1, 5], [0.004, 0.01], reacstrs) 
-create_uncertainty_plots([13, 15], [0.004, 0.01], reacstrs) 
+create_uncertainty_plots([0.1, 5], [0.004, 0.01], reacstrs)
+create_uncertainty_plots([13, 15], [0.004, 0.01], reacstrs)
 plot_sacs_table()
