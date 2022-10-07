@@ -13,10 +13,10 @@ EXPERIMENT : Heaton + Grundl memo + Grundl-Gilliam + Schroeder + Davis/Knoll
  9  1  0 1.215E+3  1.7900    U235F                Davis/Knoll ANE 5 (1978) 583 - Used by Mannhart
 10  3  0 1.790E+3  2.2600    PU239F               Davis/Knoll ANE 5 (1978) 583 - Used by Mannhart
  100                                                                                         1    Grundl memo ABS (rev. Heaton)
-  23 100                                                                                     2    Grundl/Gilliam ratio
-  -9  36 100                                                                                 3    Grundl/Gilliam ratio
+  23 100                                                                                     2    Grundl/Gilliam ratio - numbers from original Mannhart input 2007
+  -9  15 100                                                                                 3    Grundl/Gilliam ratio - numbers from original Mannhart input 2007
    0   0   0 100                                                                             4    Heaton ratio
-   0   0   0  60 100                                                                         5    Heaton ratio
+   0   0   0  59 100                                                                         5    Heaton ratio - correlation taken from Knoll below
    0   0   0   0   0 100                                                                     6    Schroeder ratio
    0   0   0   0   0  39 100                                                                 7    Schroeder ratio
    0   0   0   0   0   0   0 100                                                             8    Schroeder ABS
