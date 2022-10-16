@@ -1,6 +1,6 @@
 params_eval2017:
   gmapi_rev: '4c4fbc1'
-  fix_ppp_bug: True
+  fix_ppp_bug: False
 params_dbcreation:
   gmapi_rev: '4c4fbc1'
   dbname: data2017

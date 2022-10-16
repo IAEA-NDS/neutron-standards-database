@@ -62,16 +62,16 @@ stages:
       md5: 58b017e53be8ebc38f3a3087b1548479
       size: 7939049
     - path: eval2017/
-      md5: c9290f2e58c4f45472ce4214efca16a9.dir
-      size: 120274
+      md5: 84e5a49db39b9953aa5e2bce77bceb34.dir
+      size: 120190
       nfiles: 37
     outs:
     - path: results/
-      md5: 0c8ec6dfe3c8d350a25cc8469dc3d901.dir
-      size: 134842
+      md5: 3144a79047e03a77b4cc71a841d09678.dir
+      size: 134435
       nfiles: 37
   evaluate_database2017:
-    cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1' --fix_ppp_bug
+    cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1'
     deps:
     - path: codes/produce_std2017_result.py
       md5: 8cd82b78e6ef2042e4314d0f4777608f
@@ -84,6 +84,6 @@ stages:
       size: 8405267
     outs:
     - path: eval2017/
-      md5: c9290f2e58c4f45472ce4214efca16a9.dir
-      size: 120274
+      md5: 84e5a49db39b9953aa5e2bce77bceb34.dir
+      size: 120190
       nfiles: 37
