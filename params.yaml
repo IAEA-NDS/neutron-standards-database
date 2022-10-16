@@ -1,12 +1,13 @@
 params_eval2017:
   gmapi_rev: '4c4fbc1'
-  fix_ppp_bug: True
+  fix_ppp_bug: False
 params_dbcreation:
   gmapi_rev: '4c4fbc1'
-  dbname: data2017
+  dbname: data
   keep_dummy: False
   ops:
-    - leave_as_is
+    - remove_sacs_data
+    - add_mannhart_sacs
 params_eval:
   gmapi_rev: '4c4fbc1'
   correct_ppp: True

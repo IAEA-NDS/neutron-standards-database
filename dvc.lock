@@ -35,19 +35,19 @@ stages:
       size: 6941915
       nfiles: 23
   create_database:
-    cmd: python codes/create_derived_database.py --gmapi_rev '4c4fbc1' --dbname 'data2017'
-      --ops 'leave_as_is'
+    cmd: python codes/create_derived_database.py --gmapi_rev '4c4fbc1' --dbname 'data'
+      --ops 'remove_sacs_data' 'add_mannhart_sacs'
     deps:
     - path: codes/create_derived_database.py
       md5: 64ddf375d17c6860de79525e0c9d843b
       size: 2009
-    - path: database/data2017.json
-      md5: 4974fce168ed901acecd0ec240f0f423
-      size: 8405267
+    - path: database/data.json
+      md5: cc8d741e7f910674c29eaed89a8887ae
+      size: 8638475
     outs:
     - path: database/testdata.json
-      md5: 58b017e53be8ebc38f3a3087b1548479
-      size: 7939049
+      md5: 546b60371cb32af6f68a9011b18b84aa
+      size: 8257459
   evaluate_database:
     cmd: python codes/produce_result.py --gmapi_rev '4c4fbc1' --correct_ppp --fix_sacs_jacobian
       --maxiter 30 --rtol 0.001 --atol 0.001 --lmb 1e-08 --rel_to_std2017
@@ -59,19 +59,19 @@ stages:
       md5: c6b1a92d69458380c82d01564cf6fb4f
       size: 6730
     - path: database/testdata.json
-      md5: 58b017e53be8ebc38f3a3087b1548479
-      size: 7939049
+      md5: 546b60371cb32af6f68a9011b18b84aa
+      size: 8257459
     - path: eval2017/
-      md5: c9290f2e58c4f45472ce4214efca16a9.dir
-      size: 120274
+      md5: 84e5a49db39b9953aa5e2bce77bceb34.dir
+      size: 120190
       nfiles: 37
     outs:
     - path: results/
-      md5: 0c8ec6dfe3c8d350a25cc8469dc3d901.dir
-      size: 134842
+      md5: 6e8f39c0fd46f43c5fc89a00e3d0fae6.dir
+      size: 139523
       nfiles: 37
   evaluate_database2017:
-    cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1' --fix_ppp_bug
+    cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1'
     deps:
     - path: codes/produce_std2017_result.py
       md5: 8cd82b78e6ef2042e4314d0f4777608f
@@ -84,6 +84,6 @@ stages:
       size: 8405267
     outs:
     - path: eval2017/
-      md5: c9290f2e58c4f45472ce4214efca16a9.dir
-      size: 120274
+      md5: 84e5a49db39b9953aa5e2bce77bceb34.dir
+      size: 120190
       nfiles: 37
