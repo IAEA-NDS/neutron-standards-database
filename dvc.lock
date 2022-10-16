@@ -34,3 +34,56 @@ stages:
       md5: f1ab55a07eb69e92d47c198726296832.dir
       size: 6941915
       nfiles: 23
+  create_database:
+    cmd: python codes/create_derived_database.py --gmapi_rev '4c4fbc1' --dbname 'data2017'
+      --ops 'leave_as_is'
+    deps:
+    - path: codes/create_derived_database.py
+      md5: 64ddf375d17c6860de79525e0c9d843b
+      size: 2009
+    - path: database/data2017.json
+      md5: 4974fce168ed901acecd0ec240f0f423
+      size: 8405267
+    outs:
+    - path: database/testdata.json
+      md5: 58b017e53be8ebc38f3a3087b1548479
+      size: 7939049
+  evaluate_database:
+    cmd: python codes/produce_result.py --gmapi_rev '4c4fbc1' --correct_ppp --fix_sacs_jacobian
+      --maxiter 30 --rtol 0.001 --atol 0.001 --lmb 1e-08 --rel_to_std2017
+    deps:
+    - path: codes/produce_result.py
+      md5: 2b72a37fc2e30d1bc69ae31c6a44387e
+      size: 2759
+    - path: codes/save_result.py
+      md5: c6b1a92d69458380c82d01564cf6fb4f
+      size: 6730
+    - path: database/testdata.json
+      md5: 58b017e53be8ebc38f3a3087b1548479
+      size: 7939049
+    - path: eval2017/
+      md5: c9290f2e58c4f45472ce4214efca16a9.dir
+      size: 120274
+      nfiles: 37
+    outs:
+    - path: results/
+      md5: 0c8ec6dfe3c8d350a25cc8469dc3d901.dir
+      size: 134842
+      nfiles: 37
+  evaluate_database2017:
+    cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1' --fix_ppp_bug
+    deps:
+    - path: codes/produce_std2017_result.py
+      md5: 8cd82b78e6ef2042e4314d0f4777608f
+      size: 1017
+    - path: codes/save_result.py
+      md5: c6b1a92d69458380c82d01564cf6fb4f
+      size: 6730
+    - path: database/data2017.json
+      md5: 4974fce168ed901acecd0ec240f0f423
+      size: 8405267
+    outs:
+    - path: eval2017/
+      md5: c9290f2e58c4f45472ce4214efca16a9.dir
+      size: 120274
+      nfiles: 37

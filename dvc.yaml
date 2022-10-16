@@ -1,17 +1,113 @@
 stages:
-  prepare_data:
-    cmd: python codes/create_data_with_sacs_variations.py
+  evaluate_database2017:
+    cmd: >-
+      python codes/produce_std2017_result.py ${params_eval2017}
     deps:
-    - codes/create_data_with_sacs_variations.py
-    - database/data.json
-    - database/data2017.json
+      - codes/produce_std2017_result.py
+      - codes/save_result.py
+      - database/data2017.json
     outs:
-    - database/data2017_with_mannhart_sacs.json
-    - database/data_with_mannhart_sacs.json
-  create_plots:
-    cmd: python codes/create_analysis_plots.py
+      - eval2017/:
+          cache: false
+
+  create_database:
+    cmd: >-
+      python codes/create_derived_database.py ${params_dbcreation}
     deps:
-    - codes/create_analysis_plots.py
-    - database/
+      - codes/create_derived_database.py
+      - database/${params_dbcreation.dbname}.json
     outs:
-    - plots/
+      - database/testdata.json:
+          cache: false
+
+  evaluate_database:
+    cmd: >-
+      python codes/produce_result.py ${params_eval}
+    deps:
+      - codes/produce_result.py
+      - codes/save_result.py
+      - database/testdata.json
+      - eval2017/
+    outs:
+      - results/:
+          cache: false
+
+plots:
+  results/result_MT-1-R1-1_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: '6Li(n,a)'
+  results/result_MT-1-R1-2_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: '6Li(n,n)'
+  results/result_MT-1-R1-3_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: '10B(n,a0)'
+  results/result_MT-1-R1-4_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: '10B(n,a1)'
+  results/result_MT-1-R1-5_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: '10B(n,n)'
+  results/result_MT-1-R1-6_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: 'Au(n,gamma)'
+  results/result_MT-1-R1-7_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: 'U8(n,gamma)'
+  results/result_MT-1-R1-8_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: 'U5(n,f)'
+  results/result_MT-1-R1-9_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: 'Pu9(n,f)'
+  results/result_MT-1-R1-10_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'xs / xs2017'
+    title: 'U8(n,f)'
+  results/result_MT-3-R1-10-R2-8_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'ratio / ratio2017'
+    title: 'U8(n,f) / U5(n,f)'
+  results/result_MT-3-R1-9-R2-8_relto_std2017.csv:
+    x: ENERGY
+    y: POST
+    x_label: 'energy [MeV]'
+    y_label: 'ratio / ratio2017'
+    title: 'Pu9(n,f) / U5(n,f)'
+  results/result_sacs.csv:
+    x: POST
+    y: NODE
+    title: 'SACS and ratio of SACS'
+    template: bar_horizontal
+  results/result_sacs_corplot.png:
