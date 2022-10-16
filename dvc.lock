@@ -36,7 +36,7 @@ stages:
       nfiles: 23
   create_database:
     cmd: python codes/create_derived_database.py --gmapi_rev '4c4fbc1' --dbname 'data'
-      --ops 'remove_sacs_data' 'add_mannhart_sacs'
+      --ops 'remove_sacs_data' 'add_mannhart_sacs' 'change_pu9_absratio_to_shape'
     deps:
     - path: codes/create_derived_database.py
       md5: 64ddf375d17c6860de79525e0c9d843b
@@ -46,7 +46,7 @@ stages:
       size: 8638475
     outs:
     - path: database/testdata.json
-      md5: 546b60371cb32af6f68a9011b18b84aa
+      md5: 9144b742d0d9b3b1b50cf03ffbf61338
       size: 8257459
   evaluate_database:
     cmd: python codes/produce_result.py --gmapi_rev '4c4fbc1' --correct_ppp --fix_sacs_jacobian
@@ -59,7 +59,7 @@ stages:
       md5: c6b1a92d69458380c82d01564cf6fb4f
       size: 6730
     - path: database/testdata.json
-      md5: 546b60371cb32af6f68a9011b18b84aa
+      md5: 9144b742d0d9b3b1b50cf03ffbf61338
       size: 8257459
     - path: eval2017/
       md5: 84e5a49db39b9953aa5e2bce77bceb34.dir
@@ -67,8 +67,8 @@ stages:
       nfiles: 37
     outs:
     - path: results/
-      md5: 6e8f39c0fd46f43c5fc89a00e3d0fae6.dir
-      size: 139523
+      md5: 039432c6fbb70dfc8c971227eaeca784.dir
+      size: 138911
       nfiles: 37
   evaluate_database2017:
     cmd: python codes/produce_std2017_result.py --gmapi_rev '4c4fbc1'

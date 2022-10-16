@@ -8,6 +8,7 @@ params_dbcreation:
   ops:
     - remove_sacs_data
     - add_mannhart_sacs
+    - change_pu9_absratio_to_shape
 params_eval:
   gmapi_rev: '4c4fbc1'
   correct_ppp: True
