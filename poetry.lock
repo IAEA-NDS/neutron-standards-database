@@ -576,6 +576,26 @@ tf = ["tensorflow"]
 xgb = ["xgboost"]
 
 [[package]]
+name = "endf-parserpy"
+version = "0.1.0"
+description = "A package to read and write ENDF files'"
+category = "main"
+optional = false
+python-versions = "^3.8"
+develop = false
+
+[package.dependencies]
+lark = "^1.1.2"
+numpy = "^1.23.2"
+pandas = "^1.4.4"
+
+[package.source]
+type = "git"
+url = "https://github.com/iaea-nds/endf-parserpy.git"
+reference = "0b013babba"
+resolved_reference = "0b013babba41761b2faadabbc725d16a688bc8c4"
+
+[[package]]
 name = "filelock"
 version = "3.8.0"
 description = "A platform independent file lock."
@@ -835,6 +855,19 @@ sqlalchemy = ["sqlalchemy"]
 sqs = ["boto3 (>=1.9.12)", "pycurl (>=7.44.1,<7.45.0)", "urllib3 (>=1.26.7)"]
 yaml = ["PyYAML (>=3.10)"]
 zookeeper = ["kazoo (>=1.3.1)"]
+
+[[package]]
+name = "lark"
+version = "1.1.3"
+description = "a modern parsing library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+atomic_cache = ["atomicwrites"]
+nearley = ["js2py"]
+regex = ["regex"]
 
 [[package]]
 name = "matplotlib"
@@ -1427,7 +1460,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8, <3.10"
-content-hash = "4de2b40b0538e1b9497416656dbd26e097dc220c86c252e2c7985e6b00693457"
+content-hash = "ba865bb8f54e38859e3f82d62059cc9d2a1684f5552a3b7a4a42060ea5e2e8e7"
 
 [metadata.files]
 aiohttp = [
@@ -1843,6 +1876,7 @@ dvclive = [
     {file = "dvclive-0.12.0-py3-none-any.whl", hash = "sha256:3a3ea900086237f790f1e39227c07bbc7dc4014adfc370a014b29b5eceba3794"},
     {file = "dvclive-0.12.0.tar.gz", hash = "sha256:ca4538629f2cfde4c371adf6b03f660334bcef311d077185e7c9be38b7d314a6"},
 ]
+endf-parserpy = []
 filelock = [
     {file = "filelock-3.8.0-py3-none-any.whl", hash = "sha256:617eb4e5eedc82fc5f47b6d61e4d11cb837c56cb4544e39081099fa17ad109d4"},
     {file = "filelock-3.8.0.tar.gz", hash = "sha256:55447caa666f2198c5b6b13a26d2084d26fa5b115c00d065664b2124680c4edc"},
@@ -2040,6 +2074,10 @@ kiwisolver = [
 kombu = [
     {file = "kombu-5.2.4-py3-none-any.whl", hash = "sha256:8b213b24293d3417bcf0d2f5537b7f756079e3ea232a8386dcc89a59fd2361a4"},
     {file = "kombu-5.2.4.tar.gz", hash = "sha256:37cee3ee725f94ea8bb173eaab7c1760203ea53bbebae226328600f9d2799610"},
+]
+lark = [
+    {file = "lark-1.1.3-py3-none-any.whl", hash = "sha256:45cd8b4d8b0487863f0f4cf3c305a1293db86af576d4a62cfb572e57a9b609e5"},
+    {file = "lark-1.1.3.tar.gz", hash = "sha256:ca0d1aeb57f434c7276d209729e92b0e5017d177dde553134760c35bb4647d11"},
 ]
 matplotlib = [
     {file = "matplotlib-3.6.1-cp310-cp310-macosx_10_12_universal2.whl", hash = "sha256:7730e60e751cfcfe7fcb223cf03c0b979e9a064c239783ad37929d340a364cef"},
