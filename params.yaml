@@ -7,6 +7,8 @@ params_dbcreation:
   keep_dummy: False
   ops:
     - leave_as_is
+  prior_ops:
+    - leave_as_is
 params_eval:
   gmapi_rev: '4c4fbc1'
   correct_ppp: True

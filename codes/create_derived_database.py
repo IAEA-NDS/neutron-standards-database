@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--dbname', type=str)
 parser.add_argument('--keep_dummy', action='store_true')
 parser.add_argument('--ops', type=str, nargs='*', default=[])
+parser.add_argument('--prior_ops', type=str, nargs='*', default=[])
 parser.add_argument('--gmapi_rev', type=str)
 args = parser.parse_args()
 
@@ -24,6 +25,7 @@ dbname = args.dbname
 keep_dummy = args.keep_dummy
 gmapi_rev = args.gmapi_rev
 ops = args.ops
+prior_ops = args.prior_ops
 
 print('---- modifications to database ----')
 print('root database: ' + str(dbname))
@@ -47,17 +49,30 @@ from gmapi.mappings.priortools import remove_dummy_datasets
 
 datafile = os.path.join('database', dbname + '.json')
 db_dic = read_gma_database(datafile)
+prior_list = db_dic['prior_list']
 datablock_list = db_dic['datablock_list']
 if not keep_dummy:
     remove_dummy_datasets(datablock_list)
 
+savedir = os.getcwd()
+os.chdir(os.path.join('codes', 'database_modifications'))
+
+print('--> modifications of the datablock list:')
 for curop in ops:
     print('applying ' + curop)
     curop_module = importlib.import_module(curop)
     datablock_list = curop_module.apply(datablock_list)
 
+print('--> modifications of the prior list:')
+for curop in prior_ops:
+    print('applying ' + curop)
+    curop_module = importlib.import_module(curop)
+    prior_list = curop_module.apply(prior_list)
+
+os.chdir(savedir)
+
 new_db_dic = {
-    'prior': db_dic['prior_list'],
+    'prior': prior_list,
     'datablocks': datablock_list
 }
 

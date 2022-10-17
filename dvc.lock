@@ -36,11 +36,11 @@ stages:
       nfiles: 23
   create_database:
     cmd: python codes/create_derived_database.py --gmapi_rev '4c4fbc1' --dbname 'data2017'
-      --ops 'leave_as_is'
+      --ops 'leave_as_is' --prior_ops 'leave_as_is'
     deps:
     - path: codes/create_derived_database.py
-      md5: 64ddf375d17c6860de79525e0c9d843b
-      size: 2009
+      md5: 616a857e5289ae3a04c425df86c0f35f
+      size: 2478
     - path: database/data2017.json
       md5: 4974fce168ed901acecd0ec240f0f423
       size: 8405267
