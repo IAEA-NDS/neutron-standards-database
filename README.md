@@ -1,4 +1,4 @@
-### About this repository
+## About this repository
 
 The purpose of this repository is to
 help collaborators in the neutron data standards
@@ -160,6 +160,17 @@ dvc plots diff c1.std2017-new-code c2.new-input
 ```
 It will generate by default a file `dvc_plots/index.html`
 that you can open in your browser to see all plots at once.
+
+### Troubleshooting
+
+Issues that users may encounter are collected here.
+
+- *dvc exp run* yieles the error message
+*ERROR: unexpected - 'cannot stash changes - there is nothing to stash.'*
+This can be solved by making a change in a file under git version control
+that does not impact the result of the pipeline execution. For instance,
+adding a blank line at the end of *params.yaml* solves the issue.
+
 
 [dvc]: https://dvc.org/
 [poetry]: https://python-poetry.org/
