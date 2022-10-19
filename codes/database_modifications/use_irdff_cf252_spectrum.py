@@ -27,20 +27,7 @@ def apply(prior_list):
 
     assert np.all(np.sort(energies) == energies)
     assert np.all(np.sort(en) == en)
-    # create sensitivity matrix to map from
-    # coarse covmat mesh to fine-grained spectrum mesh
-    en_idcs = np.searchsorted(energies, en)
-    assert en_idcs[0] == 0
-    en_idcs[0] = 1
-    en_idcs -= 1
-    i_list = []
-    j_list = []
-    v_list = []
-    for i in range(len(en)):
-        i_list.append(i)
-        j_list.append(en_idcs[i])
-        v_list.append(1.)
-
+    # remove the legacy fission spectrum
     fis_idx = None
     for idx, curprior in enumerate(prior_list):
         if curprior['type'] == 'legacy-fission-spectrum':
@@ -49,6 +36,8 @@ def apply(prior_list):
     assert fis_idx is not None
     prior_list.pop(fis_idx)
 
+    # add the IRDFF-II Cf-252 spectrum in a
+    # new prior blocktype (experimental extension)
     new_fis_block = {
         'type': 'modern-fission-spectrum',
         'energies': en,
