@@ -18,18 +18,8 @@ def apply(prior_list):
     # reconstruct covariance matrix
     energies = np.array(tuple(E.values())) / 1e6
     n = len(energies)-1
-    covmat = np.full((n, n), 0.0)
-    for i in F.keys():
-        for j in F[i].keys():
-            covmat[i-1, j-1] = F[i][j]
-            if i != j:
-                covmat[j-1, i-1] = F[i][j]
-    # make positive definite
-    covmat = covmat + np.identity(covmat.shape[0])*2e-4
+    covmat = np.diag(np.full(n, 1e-10))
 
-    assert np.all(np.sort(energies) == energies)
-    assert np.all(np.sort(en) == en)
-    # remove the legacy fission spectrum
     fis_idx = None
     for idx, curprior in enumerate(prior_list):
         if curprior['type'] == 'legacy-fission-spectrum':
