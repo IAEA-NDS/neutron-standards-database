@@ -17,14 +17,19 @@ This repository contains database files in the GMA format
 and equivalent JSON files. There are two base files available in
 this repository:
 
-- `database/data2017.json` and `database/data2017.gma` contain
-   the neutron standards database as used in the
-   [std2017 evaluation][std2017-paper].
-- `database/data.json` and `database/data.gma` are based on
-   `data2017.json` and updated with
-   data from the NIFFTE collaboration, see [Neudecker2021], and
-   also a more elaborate uncertainty quantification using templates
-   by [Neudecker2020].
+- `database/data2017.json` and the equivalent `database/data2017.gma` file
+   contain the neutron standards database as used for the
+   [neutron data standards 2017 evaluation][std2017-paper].
+- `database/data.json` and the equivalent `database/data.gma` file are based on
+   `data2017.json` and updated with data from the NIFFTE collaboration,
+   see [Neudecker2021], and also a more elaborate uncertainty quantification
+   using templates by [Neudecker2020].
+-  The `database/data.crd` file contains raw experimental data, which were
+   reduced and then stored as datasets in the `database/data.gma` file
+   by means of the [DATP] code. Please note that some modifications were
+   performed manually and directly in the `data.gma` file so the
+   dataset specifications in the `data.crd` and `data.gma` file may not fully
+   correspond for some datasets.
 
 The `codes/` subdirectory includes the codes to introduce
 modifications to the database and to perform evaluations.
@@ -165,7 +170,7 @@ that you can open in your browser to see all plots at once.
 
 Issues that users may encounter are collected here.
 
-- *dvc exp run* yieles the error message
+- *dvc exp run* yields the error message
 *ERROR: unexpected - 'cannot stash changes - there is nothing to stash.'*
 This can be solved by making a change in a file under git version control
 that does not impact the result of the pipeline execution. For instance,
@@ -180,3 +185,4 @@ adding a blank line at the end of *params.yaml* solves the issue.
 [GMAP]: https://github.com/IAEA-NDS/GMAP-Fortran
 [gmapy]: https://github.com/iaea-nds/gmapy
 [SuiteSparse]: https://github.com/DrTimothyAldenDavis/SuiteSparse
+[DATP]: https://github.com/IAEA-NDS/DATP-Fortran
