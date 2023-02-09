@@ -9,6 +9,7 @@ sys.path.insert(0, 'codes/gmapy')
 from gmapi.mappings.compound_map import CompoundMap
 from gmapi.mappings.priortools import propagate_mesh_css
 from gmapi.inference import compute_posterior_covmat
+import pickle
 
 
 def save_result(res, is_std2017=False,
@@ -19,6 +20,8 @@ def save_result(res, is_std2017=False,
         os.makedirs('eval2017', exist_ok=True)
     else:
         os.makedirs('results', exist_ok=True)
+        with open('results/evaluation.pkl', 'wb') as f:
+            pickle.dump(res, f)
 
     tbl = res['table']
     # produce the tables with the Pu9/U5(n,f) ratios, and SACS and SACS ratios
